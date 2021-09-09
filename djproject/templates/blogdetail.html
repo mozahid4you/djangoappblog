@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}{{blogmodel.title_tag}}{% endblock %}</title>
+</head>
+<body>
+
+{% block content %}
+<div class="container">
+    <h2 style="text-align:center;">{{blogmodel.title}}</h2>
+<p style="text-align:center;">{% if blogmodel.image.url %}<img src="{{blogmodel.image.url}}" alt="image" height="auto" width="200">{%endif%}</p>
+    <p>{{blogmodel.description}}&nbsp;{{blogmodel.dt|date:'d/m/Y'}}&nbsp;<span class="text-dark">(Author:&nbsp;{{blogmodel.author.username}})</span><a href="{% url 'update' blogmodel.pk %}" style="text-decoration:none;">
+        <strong>(Edit post)</strong></a></p>
+    <div style="text-align:center">
+        <a href="{% url 'home' %}" class="btn btn-dark btn-sm">Back</a>
+        <a href="{% url 'delete' blogmodel.pk %}"><button class="btn btn-danger btn-sm">Delete post</button></a><br>
+    </div>
+</div>
+
+
+{% endblock %}
+</body>

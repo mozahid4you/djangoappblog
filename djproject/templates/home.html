@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Home{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+{% for blogmodel in object_list %}
+<div class="container" >
+    <div class="row">
+        <div class="col-xs col-sm-2" style="text-align:center;"><img src="{{blogmodel.image.url}}" class="img-fluid" height="auto" width="200"></div>
+        <div class="col-xs col-sm-10"> <a href="{% url 'detail' blogmodel.pk %}"
+                                          style="text-decoration:none;"><strong>{{blogmodel.title}}</strong></a><br>
+        {{blogmodel.description |truncatechars:125}}</div>
+
+
+    </div>
+</div><br>
+{% endfor %}
+<br><br>
+<!--Pagination-->
+<div class="container">
+    <ul class="pagination pagination-md justify-content-center">
+    <li class="page-item">
+        {% if page_obj.has_previous %}
+
+      <a class="page-link btn btn-md bg-secondary text-white" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"
+         >
+        <span aria-hidden="true">Previous</span>
+      </a>
+        {% endif %}
+    </li>
+    <li class="page-item">
+        {% if page_obj.has_next %}
+      <a class="page-link btn btn-md bg-secondary text-white" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">Next</span>
+      </a>
+        {% endif %}
+    </li>
+</ul>
+</div>
+{% endblock %}
+</body>
+</html>

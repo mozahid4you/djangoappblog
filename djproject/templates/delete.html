@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+{% block content%}
+<div class="container">
+    {% if user.is_authenticated %}
+
+
+        {% if user.id == blogmodel.author.id %}
+    <h3>Are you sure?</h3><br>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger btn-sm">Delete</button>
+</form>{% endif %}
+    {% else %}
+You're not allowed sorry!
+    {% endif %}
+</div>
+{% endblock %}
+</body>
+</html>
